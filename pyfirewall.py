@@ -57,12 +57,17 @@ def put_firewall(id, firewall):
     return None
     
 def get_public_ipv4():
-    ip = requests.get('https://api.ipify.org').text
+    ipjson = requests.get('https://api.myip.com').text
+    ip = json.loads(ipjson)['ip']
     return format(ip)
 
 def get_cf_addresses():
     cf = requests.get('https://www.cloudflare.com/ips-v4').text
     return cf.splitlines()
+
+#Print Current IP - Used for testing and modifying the script later to add rule for local IP address
+print("My Currrent IP Address:")
+print(get_public_ipv4())
 
 #Get the current firewall information
 firewall_info = get_firewalls()
