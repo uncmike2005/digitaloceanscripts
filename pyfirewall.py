@@ -74,16 +74,14 @@ myFirewall = {}
 if firewall_info is not None:
 #    print("Here's your info: ")
     for k in firewall_info['firewalls']:
-        #print(k['id'])
         if k['name'] == name:
             myFirewall = k
-        #print(k[0])
 else:
     print('[!] Request Failed')
 
 id = myFirewall['id']
 
-#Remove items from the JSON to prep for POST to the DO API
+#Remove items from the JSON to prep for GET to the DO API
 del myFirewall['id']
 del myFirewall['status']
 del myFirewall['pending_changes']
@@ -91,7 +89,6 @@ del myFirewall['created_at']
 
 #Create a new rule to replace the old rules
 myRules = []
-#newRule = {'protocol': 'tcp', 'ports': '443', 'sources': ''}
 cf = get_cf_addresses()
 i = 0
 print("Cloudflare IP Ranges:")
